@@ -1,8 +1,9 @@
 """
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
+from sqlite3 import IntegrityError
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Products, Seller , Comprador
+from api.models import db, User, Products, Seller , Comprador , Address
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 
@@ -298,3 +299,93 @@ def update_seller(seller_id):
     db.session.commit()
     
     return jsonify({"msg":"vendedor actualizado"}), 200
+
+
+
+#//////////////////////damian
+
+# Obtener todas las direcciones
+@api.route('/address', methods=['GET'])
+def get_addresses():
+    addresses = Address.query.all()  # Obtiene todas las direcciones de la base de datos
+    return jsonify([address.serialize() for address in addresses]), 200  # Devuelve en formato JSON
+
+# Obtener una dirección por su ID
+@api.route('/address/<int:address_id>', methods=['GET'])
+def get_address(address_id):
+    address = Address.query.get(address_id)  # Obtiene la dirección por ID
+    if not address:
+        return jsonify({"message": "Dirección no encontrada"}), 404  # Si no se encuentra, devuelve 404
+    return jsonify(address.serialize()), 200  # Devuelve la dirección en formato JSON si la encuentra
+
+# Agregar una nueva dirección
+@api.route('/address', methods=['POST'])
+def add_address():
+    new_address_data = request.get_json()  # Obtiene los datos JSON enviados en la solicitud
+    
+    if not new_address_data:  # Verifica que se haya enviado algún dato
+        return jsonify({"error": "No se proporcionaron datos"}), 400  # Si no se envían datos, devuelve error 400
+
+    # Verifica que los campos requeridos estén presentes
+    required_fields = ["address", "codigo_postal", "ciudad", "pais"]
+    if not all(field in new_address_data for field in required_fields):
+        return jsonify({"error": f"Faltan campos requeridos: {', '.join(required_fields)}"}), 400
+
+    # Crea una nueva dirección
+    new_address = Address(
+        address=new_address_data["address"],
+        codigo_postal=new_address_data["codigo_postal"],
+        ciudad=new_address_data["ciudad"],
+        pais=new_address_data["pais"]
+    )
+
+    try:
+        # Guarda la nueva dirección en la base de datos
+        db.session.add(new_address)
+        db.session.commit()
+    except IntegrityError:
+        db.session.rollback()
+        return jsonify({"error": "Error al intentar guardar la dirección"}), 500  # Si hay algún problema al guardar
+
+    return jsonify({"message": "Dirección agregada exitosamente"}), 201  # Devuelve mensaje de éxito
+
+# Actualizar una dirección existente
+@api.route('/address/<int:address_id>', methods=['PUT'])
+def update_address(address_id):
+    address = Address.query.get(address_id)  # Obtiene la dirección por ID
+
+    if address is None:
+        return jsonify({"error": "Dirección no encontrada"}), 404  # Si no se encuentra, devuelve error 404
+
+    data = request.get_json()  # Obtiene los datos de la solicitud
+
+    if not data:  # Verifica que los datos no estén vacíos
+        return jsonify({"error": "No se proporcionaron datos para la actualización"}), 400
+
+    # Actualiza los campos solo si fueron proporcionados en la solicitud
+    if 'address' in data:
+        address.address = data['address']
+    if 'codigo_postal' in data:
+        address.codigo_postal = data['codigo_postal']
+    if 'ciudad' in data:
+        address.ciudad = data['ciudad']
+    if 'pais' in data:
+        address.pais = data['pais']
+
+    db.session.commit()  # Guarda los cambios en la base de datos
+
+    return jsonify({"message": "Dirección actualizada exitosamente"}), 200  # Devuelve mensaje de éxito
+
+# Eliminar una dirección
+@api.route('/address/<int:address_id>', methods=['DELETE'])
+def delete_address(address_id):
+    address = Address.query.get(address_id)  # Obtiene la dirección por ID
+
+    if address is None:
+        return jsonify({"error": "Dirección no encontrada"}), 404  # Devuelve un error 404 si no se encuentra
+
+    db.session.delete(address)  # Elimina la dirección de la base de datos
+    db.session.commit()  # Confirma la transacción
+
+    return jsonify({"message": "Dirección eliminada exitosamente"}), 200  # Devuelve mensaje de éxito
+

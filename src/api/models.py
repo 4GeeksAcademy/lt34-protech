@@ -78,4 +78,24 @@ class Comprador(db.Model):
             "clave": self.clave,
             "telefono": self.telefono
         }
+   
+class Address(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    address = db.Column(db.String(120), unique=False, nullable=False)
+    codigo_postal = db.Column(db.String(120), unique=False, nullable=False)
+    ciudad = db.Column(db.String(80), unique=False, nullable=False)
+    pais = db.Column(db.String(80), unique=False, nullable=False)
+        
+     
+    def __repr__(self):
+        return f'<Address {self.name} '
 
+    
+    def serialize(self):
+        return {
+            "id": self.id,
+            "address": self.address,
+            "codigo_postal": self.codigo_postal,
+            "ciudad": self.ciudad,
+            "pais": self.pais
+        }

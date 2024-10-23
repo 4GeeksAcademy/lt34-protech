@@ -14,7 +14,7 @@ def setup_commands(app):
     by typing: $ flask insert-test-users 5
     Note: 5 is the number of users to add
     """
-    @app.cli.command("insert-test-users") # name of our command
+    @app.cli.command("insert-test-users") # name of our commandg
     @click.argument("count") # argument of out command
     def insert_test_users(count):
         print("Creating test users")
