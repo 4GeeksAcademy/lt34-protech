@@ -30,41 +30,53 @@ export const DetailProduct = () => {
 
     }, [id, store.products]);
 
+   
+
 
     return (
         <div className="container">
-            <div className="ProductDetail">
-                {product ? (
-                    <div style={{ display: "flex", alignItems: "center" }}>
-                        <div style={{ flex: 1, marginRight: "20px" }}>
-                            <img src={product.image} alt={product.name} />
-                        </div>
-                        <div style={{ flex: 2 }}>
-                            <p>{product.category.name}</p>
-                            <h2>{product.name}</h2>
-                            <p>{product.description}</p>
-                            <p>Price: ${product.price}</p>
-                            <input
-                                type="number"
-                                size={10}
-                                value={store.amounts[product.id] || ""}
-                                onChange={(e) => actions.handleAmountChangeflux(product.id, e.target.value)}
-                                placeholder="Amount"
-                                className="form-control"
-                                id="amount"
-                            />
-                            <button
-                                className="btn btn-outline-warning"
-                                onClick={() => actions.addToCartFlux(product.id)}
-                            >
-                                Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                ) : (
-                    <p>Loading...</p>
-                )}
+           <div className="ProductDetail container">
+    {product ? (
+        <div className="row">
+            <div className="col-md-6">
+                <img src={product.image} alt={product.name} className="img-fluid" />
             </div>
+            <div className="col-md-6">
+                <p className="product-category">{product.category.name}</p>
+                <h2 className="product-title">{product.name}</h2>
+                <hr />
+                <p className="product-description">{product.description}</p>
+                <p className="product-price">Price: ${product.price}</p>
+
+                <input
+                    type="number"
+                    size={10}
+                    value={store.amounts[product.id] || ""}
+                    onChange={(e) => actions.handleAmountChangeflux(product.id, e.target.value)}
+                    placeholder="Amount"
+                    className="form-control mb-3"
+                />
+                <button
+                    className="btn btn-outline-warning"
+                    onClick={() => actions.addToCartFlux(product.id)}
+                >
+                    Add to Cart
+                </button>
+                <hr />
+                <ul className="product-info">
+                    <li><strong>Product Code:</strong> FBB00255</li>
+                    <li><strong>Availability:</strong> In Stock</li>
+                    <li><strong>Type:</strong> Fruits</li>
+                    <li><strong>Shipping:</strong> 01 day shipping. (Free pickup today)</li>
+                </ul>
+               
+            </div>
+        </div>
+    ) : (
+        <p>Loading...</p>
+    )}
+</div>
+
             <div className="ProductDetail">
                 <ul className="nav nav-underline">
                     <li className="nav-item">
