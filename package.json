@@ -83,6 +83,8 @@
 		"react-bootstrap-icons": "^1.11.4",
 		"react-dom": "^16.8.4",
 		"react-polyfills": "0.0.1",
-		"react-router-dom": "^6.3.0"
+		"react-router-dom": "^6.3.0",
+		"react-slick": "^0.30.2",
+		"slick-carousel": "^1.8.1"
 	}
 }

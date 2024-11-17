@@ -12,46 +12,10 @@ export const ProductsBuyers = () => {
     const [image, setImage] = useState("");
     const [activeTab, setActiveTab] = useState("list-tab");
     const [amounts, setAmounts] = useState({});
-    const [filter, setFilter] = useState("")
+    const [filter, setFilter] = useState("");
     const [category, setCategory] = useState("");
     const [minPrice, setMinPrice] = useState("");
     const [maxPrice, setMaxPrice] = useState("");
-
-    const getFilter = async () => {
-        const response = await fetch(process.env.BACKEND_URL + "/products");
-        const data = await response.json();
-    }
-
-    const handleMinPriceChange = (e) => {
-        setMinPrice(e.target.value);
-    };
-
-    const handleMaxPriceChange = (e) => {
-        setMaxPrice(e.target.value);
-    };
-
-
-    const filtering = (e) => {
-        setFilter(e.target.value);
-    };
-
-    let results = [];
-    if (!filter && minPrice === "" && maxPrice === "") {
-        results = products;
-    } else {
-        results = products.filter((product) => {
-            const matchesName = product.name && product.name.toLowerCase().includes(filter.toLowerCase());
-            const matchesCategory = product.category && product.category.name.toLowerCase().includes(filter.toLowerCase());
-            //esto no funciona si no lo mapeas al momento de mostrarlo
-            const price = product.price;
-            const inPriceRange =
-                (minPrice === "" || price >= parseFloat(minPrice)) &&
-                (maxPrice === "" || price <= parseFloat(maxPrice));
-            //el return esta usando or
-            return (matchesName || matchesCategory) && inPriceRange;
-        });
-    }
-
 
     const getProducts = () => {
         fetch(process.env.BACKEND_URL + "/api/products", { method: "GET" })
@@ -69,6 +33,33 @@ export const ProductsBuyers = () => {
     useEffect(() => {
         getProducts();
     }, []);
+
+    const handleMinPriceChange = (e) => {
+        setMinPrice(e.target.value);
+    };
+
+    const handleMaxPriceChange = (e) => {
+        setMaxPrice(e.target.value);
+    };
+
+    const filtering = (e) => {
+        setFilter(e.target.value);
+    };
+
+    let results = [];
+    if (!filter && minPrice === "" && maxPrice === "") {
+        results = products;
+    } else {
+        results = products.filter((product) => {
+            const matchesName = product.name && product.name.toLowerCase().includes(filter.toLowerCase());
+            const matchesCategory = product.category && product.category.name.toLowerCase().includes(filter.toLowerCase());
+            const price = product.price;
+            const inPriceRange =
+                (minPrice === "" || price >= parseFloat(minPrice)) &&
+                (maxPrice === "" || price <= parseFloat(maxPrice));
+            return (matchesName || matchesCategory) && inPriceRange;
+        });
+    }
 
     const viewMore = (product_id) => {
         fetch(process.env.BACKEND_URL + `/api/products/${product_id}`, { method: "GET" })
@@ -128,14 +119,64 @@ export const ProductsBuyers = () => {
 
     return (
         <>
-            <div>
-                <input value={filter} onChange={filtering} type="text" placeholder="search" className="form-control" ></input>
-                <input value={minPrice} onChange={handleMinPriceChange} type="number" placeholder="Min Price" />
-                <input value={maxPrice} onChange={handleMaxPriceChange} type="number" placeholder="Max Price" />
+            {/* Product Slider Section */}
+            <div className="container-fluid mb-5">
+                <h2 className="text-center mb-4">Featured Products</h2>
+                <div className="row flex-nowrap overflow-auto pb-3" style={{ scrollSnapType: 'x mandatory' }}>
+                    {products.slice(0, 6).map((product) => (
+                        <div key={product.id} className="col-md-4 col-lg-3 px-2" style={{ scrollSnapAlign: 'start' }}>
+                            <div className="card h-100">
+                                <img
+                                    src={product.image || "https://res.cloudinary.com/dqs1ls601/image/upload/v1731206219/vbxdwt1xqinu1ffd82mm.jpg"}
+                                    className="card-img-top"
+                                    alt={product.name}
+                                    style={{ height: "200px", objectFit: "cover" }}
+                                />
+                                <div className="card-body">
+                                    <h5 className="card-title">{product.name}</h5>
+                                    <p className="card-text text-truncate">{product.description}</p>
+                                    <p className="card-text"><strong>${product.price}</strong></p>
+                                    <div className="d-flex justify-content-between align-items-center">
+                                        <button
+                                            className="btn btn-primary"
+                                            onClick={() => addToCart(product.id)}
+                                        >
+                                            Add to Cart
+                                        </button>
+                                        <Link to={`/detail/${product.id}`} className="btn btn-outline-secondary">
+                                            Details
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
             </div>
 
+            {/* Search Section */}
+            <div className="container mb-4">
+                <div className="row justify-content-center">
+                    <div className="col-md-6">
+                        <div className="input-group">
+                            <span className="input-group-text">
+                                <i className="fas fa-search"></i>
+                            </span>
+                            <input 
+                                value={filter} 
+                                onChange={filtering} 
+                                type="text" 
+                                placeholder="Search by name or category" 
+                                className="form-control" 
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-            <div className="container mt-5">
+            {/* Products Table */}
+            <div className="container mt-3">
+                {/* ... resto del código de la tabla ... */}
                 <ul className="nav nav-tabs" id="myTab" role="tablist">
                     <li className="nav-item" role="presentation">
                         <button
@@ -170,10 +211,10 @@ export const ProductsBuyers = () => {
                                     <th>#</th>
                                     <td>View more</td>
                                     <th>Name</th>
-                                    <th>description</th>
-                                    <th>price</th>
-                                    <th>stock</th>
-                                    <th>image</th>
+                                    <th>Description</th>
+                                    <th>Price</th>
+                                    <th>Stock</th>
+                                    <th>Image</th>
                                     <th>Amount</th>
                                 </tr>
                             </thead>
@@ -231,11 +272,11 @@ export const ProductsBuyers = () => {
                             <thead>
                                 <tr>
                                     <th>Name</th>
-                                    <th>description</th>
-                                    <th>price</th>
-                                    <th>stock</th>
-                                    <th>image</th>
-                                    <th>category</th>
+                                    <th>Description</th>
+                                    <th>Price</th>
+                                    <th>Stock</th>
+                                    <th>Image</th>
+                                    <th>Category</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -246,7 +287,6 @@ export const ProductsBuyers = () => {
                                     <td>{stock}</td>
                                     <td>{image}</td>
                                     <td>{category}</td>
-
                                 </tr>
                             </tbody>
                         </table>

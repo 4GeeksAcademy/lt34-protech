@@ -36,7 +36,7 @@ import { DashboardProducts } from "./pages/dashboardProducts";
 import { DetailProduct } from "./pages/detailProduct";
 import { BuyerAddress } from "./pages/buyeraddress";
 
-import { Navbar } from "./component/navbar";
+
 import { Footer } from "./component/footer";
 import { Sidebar } from "./component/sidebar";
 
@@ -59,10 +59,9 @@ const Layout = () => {
     return (
         <div className="h-100 w-100">
             <ScrollToTop>
-                {showSidebar ? <Sidebar /> : <Navbar />}
+                {showSidebar ? <Sidebar /> : <Home />}
                 <div className="h-100" style={{ marginLeft: showSidebar ? "448px" : "", marginRight: showSidebar ? "167px" : "", marginTop: showSidebar ? "100px" : ""}}>
                     <Routes>
-                        <Route element={<Home />} path="/" />
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<Single />} path="/single/:theid" />
                         <Route element={<Products/>} path="/products" />

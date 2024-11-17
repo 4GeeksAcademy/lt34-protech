@@ -1,7 +1,23 @@
-/*
-    home.css: This website contains selectors only used in home.css
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
 
-    All pages share the styles on index.css but you should create 
-    one more css for each page that will contain the selected used 
-    on that page only (the ones not reused in other pages).
-*/
+
+.border-bottom {
+    border-bottom: var(--fc-border-width) var(--fc-border-style)
+    var(--fc-border-color) ;
+}
+
+.text-end {
+    text-align: right !important;
+}
+.btn-dark-blue {
+    background-color: #003366; /* Azul oscuro */
+    color: white; /* Texto en blanco */
+    border: none; /* Sin borde */
+    padding: 10px 20px; /* Espaciado interno */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor */
+}
+.btn-dark-blue:hover {
+    background-color: #002244; /* Azul más oscuro para el hover */
+}
