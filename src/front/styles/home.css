@@ -2,22 +2,59 @@
 @import "~slick-carousel/slick/slick-theme.css";
 
 
-.border-bottom {
-    border-bottom: var(--fc-border-width) var(--fc-border-style)
-    var(--fc-border-color) ;
+:root {
+  --dark-blue: #003366;
+  --light-blue: #00aaff;
+  --green: #0aad0a;
+  --light-green: #28a745;
+  --red: #dc3545;
+  --background-light: #f8f9fa;
+  --text-color: #000;
 }
 
-.text-end {
-    text-align: right !important;
+/* Estilo global */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 0;
 }
-.btn-dark-blue {
-    background-color: #003366; /* Azul oscuro */
-    color: white; /* Texto en blanco */
-    border: none; /* Sin borde */
-    padding: 10px 20px; /* Espaciado interno */
-    border-radius: 5px; /* Bordes redondeados */
-    cursor: pointer; /* Cambia el cursor */
+
+/* Contenedor principal con flexbox */
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
-.btn-dark-blue:hover {
-    background-color: #002244; /* Azul más oscuro para el hover */
+
+/* Contenido principal */
+.main-content {
+  flex: 1;
 }
+
+
+.footer {
+  background-color: var(--background-light);
+  padding: 10px;
+  text-align: center;
+  margin-top: 200px; 
+  margin-bottom: 0px; 
+
+}
+
+.h-100{
+    
+    h-100 {
+        width: 100%;
+    }
+    .h-100 {
+        height: 0% !important;
+    }
+    
+    
+}
+
+
+
+
+
+
