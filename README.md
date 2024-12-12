@@ -1,81 +1,68 @@
-# WebApp boilerplate with React JS and Flask API
+# Proyecto Final: Protech  
 
-Build web applications using React.js for the front end and python/flask for your backend API.
+![image](https://github.com/user-attachments/assets/c321aee5-f1a8-4b08-89b6-3ae0b80a70a6)
 
-- Documentation can be found here: https://start.4geeksacademy.com/starters/react-flask
-- Here is a video on [how to use this template](https://www.loom.com/share/f37c6838b3f1496c95111e515e83dd9b)
-- Integrated with Pipenv for package managing.
-- Fast deployment to heroku [in just a few steps here](https://start.4geeksacademy.com/backend/deploy-heroku-posgres).
-- Use of .env file.
-- SQLAlchemy integration for database abstraction.
+## Descripción  
 
-### 1) Installation:
+**Protech** es un marketplace de productos tecnológicos diseñado para conectar compradores y vendedores. Ofrece una experiencia fluida para la publicación, búsqueda y compra de dispositivos electrónicos, asegurando un entorno seguro y eficiente para las transacciones.  
 
-> If you use Github Codespaces (recommended) or Gitpod this template will already come with Python, Node and the Posgres Database installed. If you are working locally make sure to install Python 3.10, Node 
+## Tecnologías utilizadas  
 
-It is recomended to install the backend first, make sure you have Python 3.8, Pipenv and a database engine (Posgress recomended)
+- **Frontend:** JavaScript, React, Bootstrap  
+- **Backend:** Flask, SQLAlchemy, Python  
+- **Base de Datos:** PostgreSQL (SQLAlchemy)  
+- **Otras herramientas:** JWT, Postman, Cloudinary, Google Places API, PayPal API, OpenAI API, Chart.js 
 
-1. Install the python packages: `$ pipenv install`
-2. Create a .env file based on the .env.example: `$ cp .env.example .env`
-3. Install your database engine and create your database, depending on your database you have to create a DATABASE_URL variable with one of the possible values, make sure you replace the valudes with your database information:
+## Instrucciones de uso  
 
-| Engine    | DATABASE_URL                                        |
-| --------- | --------------------------------------------------- |
-| SQLite    | sqlite:////test.db                                  |
-| MySQL     | mysql://username:password@localhost:port/example    |
-| Postgress | postgres://username:password@localhost:5432/example |
+1. **Protech:** [Enlace al proyecto](https://sample-service-name-yv69.onrender.com).  
+2. **Registrarse como comprador.**  
+3. **Seleccionar una ubicación.**  
+4. **Comprar algunos productos.**  
+5. **Pagar con los siguientes datos:**  
+   - **Correo:** `test16@personal.example.com`  
+   - **Contraseña:** protech1  
+6. **Entrar como vendedor con los datos:**  
+   - **Correo:** `santiago@vende.com` 
+   - **Contraseña:** protech1  
+7. **Ir a la sección de órdenes y enviar el pedido.**  
 
-4. Migrate the migrations: `$ pipenv run migrate` (skip if you have not made changes to the models on the `./src/api/models.py`)
-5. Run the migrations: `$ pipenv run upgrade`
-6. Run the application: `$ pipenv run start`
+## Características principales  
 
-> Note: Codespaces users can connect to psql by typing: `psql -h localhost -U gitpod example`
+### Gestión de usuarios:  
+- Registro e inicio de sesión seguro para compradores y vendedores.  
+- Perfiles personalizados para administrar publicaciones y compras.  
+- Integración con Google Maps para agregar ubicaciones de usuarios.  
 
-### Undo a migration
+### Publicación de productos:  
+- Los vendedores pueden listar productos con imágenes, descripciones detalladas y precios.  
+- Edición y eliminación de publicaciones de productos.  
+- Posibilidad de publicar artículos sobre el cuidado o curiosidades relacionadas con sus productos.  
 
-You are also able to undo a migration by running
+### Órdenes:  
+- Los vendedores pueden administrar las órdenes de los compradores desde un panel dedicado.  
 
-```sh
-$ pipenv run downgrade
-```
+### Búsqueda y navegación:  
+- Filtros de búsqueda por nombres de productos o categorías específicas.  
+- Vistas individuales de productos con recomendaciones relacionadas.  
 
-### Backend Populate Table Users
+### Carrito de compras:  
+- Los compradores pueden agregar productos al carrito y revisar su total antes de realizar la compra.  
 
-To insert test users in the database execute the following command:
+### Sistema de pagos:  
+- Integración con PayPal (transacciones simuladas o reales) para garantizar un proceso de pago seguro.  
 
-```sh
-$ flask insert-test-users 5
-```
+## Interfaz del Usuario  
 
-And you will see the following message:
+### Perfil del usuario  
+- **Gestión de perfiles:** Edita y personaliza detalles personales.  
+- **Publicación de productos:** Los vendedores pueden gestionar publicaciones y artículos relacionados.  
+- **Vista de órdenes:** Los vendedores pueden revisar y actualizar el estado de los pedidos recibidos.  
 
-```
-  Creating test users
-  test_user1@test.com created.
-  test_user2@test.com created.
-  test_user3@test.com created.
-  test_user4@test.com created.
-  test_user5@test.com created.
-  Users created successfully!
-```
+### Backend y API  
 
-### **Important note for the database and the data inside it**
+- **Flask y SQLAlchemy:** Para gestionar la lógica del backend y las operaciones en la base de datos.  
+- **Endpoints RESTful:** Manejando autenticación y operaciones CRUD con integración entre frontend y backend.  
+- **Postman:** Utilizado para probar y validar los endpoints del backend.  
 
-Every Github codespace environment will have **its own database**, so if you're working with more people eveyone will have a different database and different records inside it. This data **will be lost**, so don't spend too much time manually creating records for testing, instead, you can automate adding records to your database by editing ```commands.py``` file inside ```/src/api``` folder. Edit line 32 function ```insert_test_data``` to insert the data according to your model (use the function ```insert_test_users``` above as an example). Then, all you need to do is run ```pipenv run insert-test-data```.
-
-### Front-End Manual Installation:
-
--   Make sure you are using node version 14+ and that you have already successfully installed and runned the backend.
-
-1. Install the packages: `$ npm install`
-2. Start coding! start the webpack dev server `$ npm run start`
-
-## Publish your website!
-
-This boilerplate it's 100% read to deploy with Render.com and Heroku in a matter of minutes. Please read the [official documentation about it](https://start.4geeksacademy.com/deploy).
-
-### Contributors
-
-This template was built as part of the 4Geeks Academy [Coding Bootcamp](https://4geeksacademy.com/us/coding-bootcamp) by [Alejandro Sanchez](https://twitter.com/alesanchezr) and many other contributors. Find out more about our [Full Stack Developer Course](https://4geeksacademy.com/us/coding-bootcamps/part-time-full-stack-developer), and [Data Science Bootcamp](https://4geeksacademy.com/us/coding-bootcamps/datascience-machine-learning).
-
-You can find other templates and resources like this at the [school github page](https://github.com/4geeksacademy/).
+Este proyecto fue desarrollado por **[Santiago Espinal](https://github.com/santiagoe16)**. Si tienes dudas o sugerencias, ¡no dudes en contactarme!

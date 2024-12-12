@@ -3,7 +3,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { Categorias } from "./categoria";
-import "/workspaces/lt34-protech/src/front/styles/home.css";
+import "../../styles/home.css";
 import { CardProduct } from "../component/cardproduct";
 
 export const Home = () => {
@@ -33,8 +33,8 @@ export const Home = () => {
         fetch(process.env.BACKEND_URL + "/api/products", { method: "GET" })
             .then((response) => response.json())
             .then((data) => {
-                setProducts(data);
-                setFilteredProducts(data);
+                setProducts(Array.isArray(data) ? data : []);
+                setFilteredProducts(Array.isArray(data) ? data : []);
             });
     };
 
@@ -44,9 +44,6 @@ export const Home = () => {
             .then((data) => setCategorias(data))
             .catch((error) => console.error("Error fetching categorias:", error));
     };
-
-    
-
 
 
     const filterProducts = (searchTerm) => {
@@ -58,10 +55,12 @@ export const Home = () => {
     };
 
     const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
-    const paginatedData = filteredProducts.slice(
-        (currentPage - 1) * itemsPerPage,
-        currentPage * itemsPerPage
-    );
+    const paginatedData = Array.isArray(filteredProducts)
+    ? filteredProducts.slice(
+          (currentPage - 1) * itemsPerPage,
+          currentPage * itemsPerPage
+      )
+    : [];
 
     const handlePageChange = (pageNumber) => {
 		setCurrentPage(pageNumber);
@@ -108,7 +107,7 @@ export const Home = () => {
                         </div>
                     </div>
                     <div className="mb-3 mb-lg-0 col-md-6 col-12">
-                        <div className="card-shop" style={{backgroundImage:"url(https://img.freepik.com/foto-gratis/vista-superior-conjunto-gadgets-luz-neon-purpura-azul_155003-19116.jpg?t=st=1732248889~exp=1732252489~hmac=8615119fb92652b923a36f42c6f366f0845055aaffe10cf22068c3727a4b86da&w=1380)"}}>
+                        <div className="card-shop" style={{backgroundImage:"url(https://res.cloudinary.com/dqs1ls601/image/upload/v1732314552/snn2dhmpcuvjqdd1zmmf.png)"}}>
                             <div>
                                 <h3 className="fw-bold mb-4">Want to start selling?</h3>
                                 <div className="mt-2">

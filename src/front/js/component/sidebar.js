@@ -4,7 +4,7 @@ import { useNavigate, NavLink } from "react-router-dom";
 import { Link } from "react-router-dom";
 import githublogo from "../../img/rigo-baby.jpg";
 import { Bag, House, Cart, ListTask, CaretDown, CaretUp, CircleFill } from 'react-bootstrap-icons';
-import "/workspaces/lt34-protech/src/front/styles/sidebar.css"
+import "../../styles/sidebar.css"
 
 export const Sidebar = () => {
     const { store, actions } = useContext(Context);

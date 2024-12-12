@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import "/workspaces/lt34-protech/src/front/styles/login.css"
+import "../../styles/login.css"
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 

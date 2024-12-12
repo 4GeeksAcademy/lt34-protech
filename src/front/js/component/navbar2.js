@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import React from "react";
 import { Link, useNavigate, NavLink, useLocation } from "react-router-dom";
 import { Context } from "../store/appContext";
-import "/workspaces/lt34-protech/src/front/styles/navbar.css";
+import "../../styles/navbar.css";
 import { Trash, Bag, Person, Motherboard, GeoAlt } from 'react-bootstrap-icons';
 
 export const Navbar2 = () => {

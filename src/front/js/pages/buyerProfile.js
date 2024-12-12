@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 
-import "/workspaces/lt34-protech/src/front/styles/profile.css";
+import "../../styles/profile.css";
 
 
 export const BuyerProfile = () => {

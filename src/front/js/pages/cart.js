@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext, useRef } from "react";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { Context } from "../store/appContext";
 import { useNavigate, useParams } from "react-router-dom";
-import "/workspaces/lt34-protech/src/front/styles/cart.css";
+import "../../styles/cart.css";
 import { Trash } from "react-bootstrap-icons";
 
 export const Cart = () => {

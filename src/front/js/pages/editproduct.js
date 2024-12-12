@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate, useParams } from "react-router-dom";
-import "/workspaces/lt34-protech/src/front/styles/addproduct.css";
+import "../../styles/addproduct.css";
 import { Cart, CurrencyDollar, People, CaretDown } from 'react-bootstrap-icons';
 
 export const EditProduct = () => {

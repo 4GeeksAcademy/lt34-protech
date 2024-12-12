@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect, useContext } from "react";
 import { LoadScript, GoogleMap, Marker, InfoWindow } from "@react-google-maps/api";
 import { Context } from "../store/appContext";
-import "/workspaces/lt34-protech/src/front/styles/address.css";
+import "../../styles/address.css";
 const libraries = ["places"];
 const defaultCenter = { lat: 4.570868, lng: -74.297333 };
 

@@ -30,6 +30,7 @@ h2{
 h5{
     font-weight: 500;
     font-size: 18.5px;
+    padding-left: 0px;
 }
 .card-black input{
     width: 100%;

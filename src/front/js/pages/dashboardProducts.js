@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
-import "/workspaces/lt34-protech/src/front/styles/dashboard.css";
+import "../../styles/dashboard.css";
 import { ThreeDotsVertical, Trash, PencilSquare, Newspaper } from 'react-bootstrap-icons';
 
 export const DashboardProducts = () => {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
-import "/workspaces/lt34-protech/src/front/styles/addproduct.css";
+import "../../styles/addproduct.css";
 
 export const OrdersPlaced = () => {
     const { store, actions } = useContext(Context);
